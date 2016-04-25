@@ -1,0 +1,22 @@
+[diff]
+	tool = vimdiff
+[diff "tool"]
+	prompt = false
+[difftool]
+	prompt = false
+[alias]
+	br = branch
+	dt = difftool
+	st = status -s
+	lo = log --pretty=oneline
+	lg = log --graph
+	co = checkout
+	ci = commit
+[user]
+	name = Charles Zhou
+	email = charleszhou@micron.com
+[color]
+	status = auto
+	diff = auto
+	branch = auto
+	interactive = auto

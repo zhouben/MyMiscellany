@@ -1,0 +1,2 @@
+find -name *.[ch] -or -name "Makefile" -or -name "*.mk"|grep -E -v "test_fw|nand_loader|sabre/"|xargs ctags
+find -name *.[ch] -or -name "Makefile"|grep -E -v "test_fw|nand_loader"|xargs cscope -b

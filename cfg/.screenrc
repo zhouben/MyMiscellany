@@ -1,0 +1,25 @@
+#hardstatus alwayslastline
+startup_message off
+
+# 加入狀態列。
+caption always "%{=u .r} %-w%<%{=ub .Y}%n %t%{=u .r}%+w "
+hardstatus alwaysignore
+hardstatus alwayslastline "%{= .K} [%l]%<%=%{= .Y}$USER%{= .R}@%H %=%{= .m} %Y/%m/%d%{= .M} %0c "
+# Set hardstatus always on
+# hardstatus alwayslastline " %-Lw%{= Bw}%n%f %t%{-}%+Lw %=| %M %d %0c:%s "
+
+defutf8 on
+defscrollback 1000
+
+# bind F7 to detach screen session (to background)
+bindkey -k k7 detach
+# # bind F8 to kill current screen window
+bindkey -k k8 kill
+# #	bind F9 to create a new screen
+bindkey -k k9 screen
+# #	bind F10 to rename current screen window
+bindkey -k k; title
+# bind F11 to move to previous window
+bindkey -k F1 prev
+# #	bind F12 to move to next window
+bindkey -k F2 next
