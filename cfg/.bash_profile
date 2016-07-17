@@ -1,4 +1,4 @@
-# .bashrc
+# .bash_profile
 export LM_LICENSE_FILE=8897@shlacgflx01,8897@shlacgflx02,8897@shlacgflx03
 export CSCOPE_EDITOR=vim
 export PATH=~/:/opt/work/charleszhou/usr/bin:$PATH
@@ -7,6 +7,7 @@ cd /opt/work/charleszhou/
 alias ho='cd firmware/apps/sabrepro/host_io'
 alias ft='cd firmware/apps/sabrepro/ftl_test'
 alias bo='cd /opt/work/charleszhou/boreas-fw/'
+alias b2='cd /opt/work/charleszhou/b2/'
 alias ww='cd /opt/work/charleszhou'
 alias fw='cd /opt/work/charleszhou/fwrepo/'
 alias d1='du -h --max-depth=1'
@@ -14,6 +15,7 @@ alias sc='screen -r'
 alias psc='ps -au|grep 1165850'
 alias ta='tmux attach'
 alias ff=_ff
+alias ss127='ssh charleszhou@fw127'
 
 # find specific file for specifc pattern
 function _ff
@@ -269,5 +271,6 @@ alias genpem='openssl genrsa -des3 -out private.pem 2048'
 alias runrepeat=_runrepeat
 alias fixcopyright='sed -i -e "s/Copyright\([^-]\+[0-9]\{4\}\)-\([0-9]\{4\}\)/Copyright\1-2015/" -e "s/Copyright\([^-]\+\)\([0-9]\{4\}\)\([^-]\)/Copyright\1\2-2015\3/"'
 alias waves='c /tools/cadence/incisive/14.20.008/tools/simvision/bin/64bit/simvision waves.shm'
+alias mj='make -j8'
 
 

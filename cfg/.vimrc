@@ -10,13 +10,6 @@ endif
 "Enable syntax hl
 syntax enable
 
-if has("unix")
-"use TAB instead of space, only for SSD project.
-set noexpandtab
-else
-set expandtab
-endif
-
 " For *.c, use space instead of TAB automantically once openning the file.
 "autocmd BufEnter * if &filetype == "c" | set expandtab | endif
 
@@ -166,14 +159,15 @@ vmap		<C-[>[B     :move '>+1<CR>gv
 vmap		<C-[>[A		:move '<-2<CR>gv
 
 " 设置多文件搜索快捷键，搜索完毕后不自动跳转
-if has("win32")
-	nmap		<M-f>		*:vimgrep /\<<c-r><c-w>\>/j **/*.[ch] **/*.txt **/*.cpp **/*.cc **/*.vhd<cr>
-	nmap		<leader>f	*:vimgrep /\<<c-r><c-w>\>/j **/*.[ch] **/*.txt **/*.cpp **/*.cc<cr>
-	"nmap		<leader>F       *:vimgrep /\<<c-r><c-w>\>/j **/*<cr>
-else
-	nmap		<c-[>f		*:vimgrep /\<<c-r><c-w>\>/j **/*.[ch] **/*.txt **/*.cpp **/*.cc **/*.vhd<cr>
-	nmap		<c-[>f      *:vimgrep /\<<c-r><c-w>\>/j **/*.[ch] **/*.txt **/*.cpp **/*.cc<cr>
-endif
+" -- obsolete, use cscope/ctags instead.
+" if has("win32")
+" 	nmap		<M-f>		*:vimgrep /\<<c-r><c-w>\>/j **/*.[ch] **/*.txt **/*.cpp **/*.cc **/*.vhd<cr>
+" 	nmap		<leader>f	*:vimgrep /\<<c-r><c-w>\>/j **/*.[ch] **/*.txt **/*.cpp **/*.cc<cr>
+" 	"nmap		<leader>F       *:vimgrep /\<<c-r><c-w>\>/j **/*<cr>
+" else
+" 	nmap		<c-[>f		*:vimgrep /\<<c-r><c-w>\>/j **/*.[ch] **/*.txt **/*.cpp **/*.cc **/*.vhd<cr>
+" 	nmap		<c-[>f      *:vimgrep /\<<c-r><c-w>\>/j **/*.[ch] **/*.txt **/*.cpp **/*.cc<cr>
+" endif
 
 "change current dir to the directory of the current file.
 nnoremap	<c-_>		:cd %:p:h<cr>
@@ -229,12 +223,14 @@ if has("cscope")
 		nnoremap    <M-t>    :cs find t <cword><cr>
 		nnoremap    <M-g>    :cs find g <cword><cr>
 		nnoremap    <M-i>    :cs find i <cword><cr>
+		nnoremap    <M-f>    :cs find f 
 	else
 		nnoremap   <c-[>s    :call Csl()<cr>
 		nnoremap   <c-[>r    :cs find c <cword><cr>
 		nnoremap   <c-[>t    :cs find t <cword><cr>
 		nnoremap   <c-[>g    :cs find g <cword><cr>
 		nnoremap   <c-[>i    :cs find i <cword><cr>
+		nnoremap   <c-[>f    :cs find f 
 	endif
 endif
 
@@ -280,3 +276,19 @@ function! Csl()
 endfunction
 
 
+let g:pydiction_location = '/home/charleszhou/complete-dict'
+let g:pydiction_menu_height = 10
+
+" A good example but doean't work well
+" -- commented by zcz
+"
+" find files and populate the quickfix list
+" fun! FindFiles(filename)
+"   let error_file = tempname()
+"   silent exe '!find . -name "'.a:filename.'" | xargs file | sed "s/:/:1:/" > '.error_file
+"   set errorformat=%f:%l:%m
+"   exe "cfile ". error_file
+"   copen
+"   call delete(error_file)
+" endfun
+" command! -nargs=1 FindFile call FindFiles(<q-args>)

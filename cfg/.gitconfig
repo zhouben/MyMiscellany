@@ -20,3 +20,7 @@
 	diff = auto
 	branch = auto
 	interactive = auto
+[push]
+	default = current
+[pull]
+	default = current

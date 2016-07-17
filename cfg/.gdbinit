@@ -1,5 +1,5 @@
-source ~/LWP2Num.py
-source ~/HTag2SysTag.py
+source ~/gdb_LWP2Num.py
+source ~/gdb_HTag2SysTag.py
 #set scheduler-locking on
 #alias -a sl = set scheduler-locking
 set confirm off
@@ -20,6 +20,9 @@ end
 
 handle SIGUSR1 nostop
 handle SIGUSR2 nostop
+
+
+so /opt/work/victorzhang/flash.gdb
 
 define comp_int
 	set $dst = (int *)$arg0
@@ -50,6 +53,7 @@ define comp_int
 	end
 	
 end
+
 
 define zth
 	set $i = 0
@@ -459,7 +463,6 @@ define showmboxhfc
 end
 
 
-
 define zshowhelp
 	printf "zmbox       : show all mboxs with sent not 0\n"
 	printf "zth         : show named thread IDs \n"
@@ -471,5 +474,5 @@ define zshowhelp
 	printf "tlp <arg>   : show a <arg> pointer to a PCIE_TLP\n"
 	printf "showehcmd   : show ehcmd\n"
 	printf "showmboxhfc : show mbox entry, with three param, mboxid mboxentry_idx mboxentry_num\n"
-	printf "comp        : compare ptr1(arg0) and ptr2(arg1) with size(unit of int) (arg2)\n"
+	printf "comp_int    : compare ptr1(arg0) and ptr2(arg1) with size(unit of integer) (arg2)\n"
 end
