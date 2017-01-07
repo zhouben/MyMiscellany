@@ -1,21 +1,22 @@
-# .bash_profile
+# .bashrc
 export LM_LICENSE_FILE=8897@shlacgflx01,8897@shlacgflx02,8897@shlacgflx03
 export CSCOPE_EDITOR=vim
-export PATH=~/:/opt/work/charleszhou/usr/bin:$PATH
+export PATH=~/:/local/charleszhou/usr/bin:$PATH
 echo set arm license path to $LM_LICENSE_FILE
-cd /opt/work/charleszhou/
-alias ho='cd firmware/apps/sabrepro/host_io'
-alias ft='cd firmware/apps/sabrepro/ftl_test'
-alias bo='cd /opt/work/charleszhou/boreas-fw/'
-alias b2='cd /opt/work/charleszhou/b2/'
-alias ww='cd /opt/work/charleszhou'
-alias fw='cd /opt/work/charleszhou/fwrepo/'
+cd /local/charleszhou/
+alias bo='cd /local/charleszhou/boreas-fw/'
+alias b1='cd /local/charleszhou/b1'
+alias hh='cd /local/charleszhou'
+alias fw='cd /local/charleszhou/fwrepo/'
 alias d1='du -h --max-depth=1'
 alias sc='screen -r'
 alias psc='ps -au|grep 1165850'
 alias ta='tmux attach'
+alias lc='cd /local/charleszhou/'
+alias ho='cd firmware/apps/sabrepro/host_io'
+alias vs='cd firmware/apps/sabrepro/vs'
+alias be='cd firmware/apps/sabrepro/be_unittest'
 alias ff=_ff
-alias ss127='ssh charleszhou@fw127'
 
 # find specific file for specifc pattern
 function _ff
@@ -213,15 +214,15 @@ function replaceall {
 	sed -i "s/$1/$2/g" $filenames
 }
 
-function grepall {
-	grep -nr $1 .
+function _grepall {
+	grep -nriHI --color=auto $1 .
 }
 
 function _jira {
   if [ "$1" == "" ]; then
     return
   fi
-  branch=`git branch -r | grep $1`
+  branch=`git branch -r | grep 'CASS'|  grep $1`
   count=`printf "${branch}\n" | wc -w`
   if [ $count -ne 1 ]; then
 	printf "$count Ambiguous jira match:\n${branch}\n"
@@ -231,7 +232,7 @@ function _jira {
   git checkout ${branch/origin\//}
 }
 
-function _gp {
+function g {
 	branch=`git branch | grep ^\* | sed -e 's/* //g'`
 	case $1 in
 		push)
@@ -252,8 +253,8 @@ stty erase '^?'
 alias ll='ls -l'
 alias startvnc='vncserver -depth 24 -geometry 1920x1080'
 alias mkws='git clone ssh://stash.micron.com:7999/boreas/boreas-fw.git'
-alias gp=_gp
 alias jira=_jira
+alias gr=_grepall
 alias premerge=_premerge
 alias cleanmerge=_cleanmerge
 alias cleangit='git clean -f'
@@ -271,6 +272,5 @@ alias genpem='openssl genrsa -des3 -out private.pem 2048'
 alias runrepeat=_runrepeat
 alias fixcopyright='sed -i -e "s/Copyright\([^-]\+[0-9]\{4\}\)-\([0-9]\{4\}\)/Copyright\1-2015/" -e "s/Copyright\([^-]\+\)\([0-9]\{4\}\)\([^-]\)/Copyright\1\2-2015\3/"'
 alias waves='c /tools/cadence/incisive/14.20.008/tools/simvision/bin/64bit/simvision waves.shm'
-alias mj='make -j8'
 
 

@@ -1,2 +1,2 @@
-find -name *.[ch] -or -name "Makefile" -or -name "*.mk"|grep -E -v "test_fw|nand_loader|sabre/"|xargs ctags
-find -name *.[ch] -or -name "Makefile"|grep -E -v "test_fw|nand_loader"|xargs cscope -b
+find -name *.[ch] -or -name "Makefile" -or -name "*.mk" -or -name "*.mak" -or -name "*.sh" -or -name "*.conf" -or -name "*.py"|grep -E -v "test_fw|nand_loader|sabre/"|xargs ctags
+find -name *.[ch] -or -name "Makefile" -or -name "*.mk" -or -name "*.mak" -or -name "*.sh" -or -name "*.conf" -or -name "*.py"|grep -E -v "test_fw|nand_loader"|xargs cscope -b

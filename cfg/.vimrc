@@ -12,6 +12,7 @@ syntax enable
 
 " For *.c, use space instead of TAB automantically once openning the file.
 "autocmd BufEnter * if &filetype == "c" | set expandtab | endif
+autocmd BufEnter * if &filetype == "python" | set expandtab | endif
 
 set shiftwidth=4
 set tabstop=4
@@ -221,16 +222,16 @@ if has("cscope")
 		nnoremap    <M-s>    :call Csl()<cr>
 		nnoremap    <M-r>    :cs find c <cword><cr>
 		nnoremap    <M-t>    :cs find t <cword><cr>
-		nnoremap    <M-g>    :cs find g <cword><cr>
 		nnoremap    <M-i>    :cs find i <cword><cr>
-		nnoremap    <M-f>    :cs find f 
+		nnoremap    <M-f>    :cs find f <cword><cr>
+		nnoremap    <M-g>    :cs find f 
 	else
 		nnoremap   <c-[>s    :call Csl()<cr>
 		nnoremap   <c-[>r    :cs find c <cword><cr>
 		nnoremap   <c-[>t    :cs find t <cword><cr>
-		nnoremap   <c-[>g    :cs find g <cword><cr>
 		nnoremap   <c-[>i    :cs find i <cword><cr>
-		nnoremap   <c-[>f    :cs find f 
+		nnoremap   <c-[>f    :cs find f <cword><cr>
+		nnoremap   <c-[>g    :cs find f 
 	endif
 endif
 

@@ -23,6 +23,7 @@ handle SIGUSR2 nostop
 
 
 so /opt/work/victorzhang/flash.gdb
+del display
 
 define comp_int
 	set $dst = (int *)$arg0
@@ -354,11 +355,11 @@ define fifodir2str
 		printf "   --   "
 	end
 end
-define pfifoabbr
+define pfifoabbrdir
 	set $fifoid = $arg0
 	printf "%3d%10d%10d%8d", $fifoid, fifo_table[$fifoid]->npush, fifo_table[$fifoid]->npop, fifo_table[$fifoid]->nreset
 	if (fifo_table[$fifoid]->pRead != fifo_table[$fifoid]->pWrite)
-		printf "%8d%8d", fifo_table[$fifoid]->pWrite, fifo_table[$fifoid]->pRead
+		printf "%8d%8d", fifo_table[$fifoid]->pRead, fifo_table[$fifoid]->pWrite
 #printf " F -> H"
 		fifodir2str  fifo_table[$fifoid]->direction
 	else
@@ -371,10 +372,10 @@ end
 
 define fp
 	set $i = 0
-	printf "%3s%10s%10s%8s%8s%8s%5s%20s\n", "ID", "npush", "npop", "nreset", "write", "read", "dir", "fifo name"
+	printf "%3s%10s%10s%8s%8s%8s%5s%20s\n", "ID", "npush", "npop", "nreset", "read", "write", "dir", "fifo name"
 	while $i < FIFO_ID_MAX
 		if ((fifo_table[$i]) && (fifo_table[$i]->npush && (fifo_table[$i]->pWrite != fifo_table[$i]->pRead)))
-			pfifoabbr $i
+			pfifoabbrdir $i
 		end
 		set $i = $i + 1
 	end
@@ -382,10 +383,10 @@ end
 
 define fs
 	set $i = 0
-	printf "%3s%10s%10s%8s%8s%8s%8s%20s\n", "ID", "npush", "npop", "nreset", "write", "read", "dir  ", "fifo name"
+	printf "%3s%10s%10s%8s%8s%8s%8s%20s\n", "ID", "npush", "npop", "nreset", "read", "write", "dir  ", "fifo name"
 	while $i < FIFO_ID_MAX
 		if ((fifo_table[$i]) && (fifo_table[$i]->npush || (fifo_table[$i]->pWrite != fifo_table[$i]->pRead)))
-			pfifoabbr $i
+			pfifoabbrdir $i
 		end
 		set $i = $i + 1
 	end
@@ -462,6 +463,21 @@ define showmboxhfc
 	end
 end
 
+define sew
+	set $my_systagid = $arg0
+	print/x ({SYSTAG_CMD_WRITE_ENTRY [2048]}context_mems.systag)[$my_systagid]
+end
+define sewm
+	set $my_systagid = $arg0
+	set $my_systag_num = $arg1
+	print/x ({SYSTAG_CMD_WRITE_ENTRY [2048]}context_mems.systag)[$my_systagid]@$my_systag_num
+end
+define slot
+	set $my_bmslotid = $arg0
+	set $my_bmslot_addr = &(context_bufmgr.buf[context_bufmgr.total_slot_size * $my_bmslotid])
+	print/x $my_bmslot_addr
+	x/32xw $my_bmslot_addr
+end
 
 define zshowhelp
 	printf "zmbox       : show all mboxs with sent not 0\n"
