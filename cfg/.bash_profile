@@ -1,9 +1,8 @@
 # .bashrc
 export LM_LICENSE_FILE=8897@shlacgflx01,8897@shlacgflx02,8897@shlacgflx03
 export CSCOPE_EDITOR=vim
-export PATH=~/:/local/charleszhou/usr/bin:$PATH
+export PATH=/usr/local/bin:$PATH
 echo set arm license path to $LM_LICENSE_FILE
-cd /local/charleszhou/
 alias bo='cd /local/charleszhou/boreas-fw/'
 alias b1='cd /local/charleszhou/b1'
 alias hh='cd /local/charleszhou'
