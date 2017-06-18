@@ -1,0 +1,5 @@
+Scripts to build linux rootfs and kernel for simulating on QEMU.
+
+1. make_rootfs.sh - make root file system from busybox
+2. prepare_sd_image.sh - create an image file with ext3 and wrap rootfs into it.
+3. runa9.sh - run qemu-system-arm for vexpress platform
